@@ -5,15 +5,23 @@
 //  Created by claudia maciel on 9/22/21.
 //
 
+import UIKit
 import CoreData
 
 final class CoreDataManager {
+    
+    // MARK: - Properties
     private let modelName: String
+    
+    //MARK: - Initialization
     
     init(modelName: String) {
         self.modelName = modelName
+        
+        setupNotificationHandling()
     }
     
+    // MARK: -
     private(set) lazy var managedObjectContext: NSManagedObjectContext = {
         let managedObjectContext = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
         managedObjectContext.persistentStoreCoordinator = self.persistentStoreCoordinator
@@ -53,4 +61,33 @@ final class CoreDataManager {
         
         return persistentStoreCoordinator
     }()
+    
+    // MARK: - Helper Functions
+    
+    private func setupNotificationHandling() {
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.addObserver(self,
+                                       selector: #selector(saveChanges(_:)),
+                                       name: UIApplication.willTerminateNotification,
+                                       object: nil)
+        notificationCenter.addObserver(self,
+                                       selector: #selector(saveChanges(_:)),
+                                       name: UIApplication.didEnterBackgroundNotification,
+                                       object: nil)
+    }
+    
+    @objc private func saveChanges(_ notificaiton: Notification) {
+        saveChanges()
+    }
+    
+    private func saveChanges() {
+        guard managedObjectContext.hasChanges else { return }
+        
+        do {
+            try managedObjectContext.save()
+        } catch {
+            print("Unable to Save Managed Object Context")
+            print("\(error), \(error.localizedDescription)")
+        }
+    }
 }
