@@ -74,6 +74,10 @@ final class CoreDataManager {
                                        selector: #selector(saveChanges(_:)),
                                        name: UIApplication.didEnterBackgroundNotification,
                                        object: nil)
+        notificationCenter.addObserver(self,
+                                       selector: #selector(saveChanges(_:)),
+                                       name: UIApplication.willEnterForegroundNotification,
+                                       object: nil)
     }
     
     @objc private func saveChanges(_ notificaiton: Notification) {

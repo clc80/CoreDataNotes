@@ -14,52 +14,46 @@ class NotesViewController: UIViewController {
     
     private let coreDataManager = CoreDataManager(modelName: "Notes")
 
+    @IBOutlet var notesView: UIView!
+    @IBOutlet var messageLabel: UILabel!
+    @IBOutlet var tableView: UITableView!
+    
+    var notes: [Note]? {
+        didSet {
+            updateView()
+        }
+    }
+    
+    private var hasNotes: Bool {
+        guard let notes = notes else { return false }
+        return notes.count > 0
+    }
     
     // MARK: - Segues
     private enum Segue {
         static let AddNote = "AddNote"
     }
     
+    // MARK: -
+    private let estimatedRowHeight = CGFloat(44.0)
+    
+    private lazy var updatedAtDateFormatter: DateFormatter = {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MMM d, HH:mm"
+        return dateFormatter
+    }()
+    
     // MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        ///newer way of adding CoreData Entity
-//        let note = Note(context: coreDataManager.managedObjectContext)
-//        note.title = "My Second Note"
-//        note.createdAt = Date()
-//        note.updatedAt = Date()
-//
-//        print(note.title ?? "No Title")
-//
-//        do {
-//            try coreDataManager.managedObjectContext.save()
-//        } catch {
-//            print("Unable to save manged object context")
-//            print("\(error), \(error.localizedDescription)")
-//        }
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
         
+        title =  "Notes"
         
-        /// Old way of adding CoreData Entity
-//        if let entityDescription = NSEntityDescription.entity(forEntityName: "Note", in: coreDataManager.managedObjectContext) {
-//            print(entityDescription.name ?? "No Name")
-//            print(entityDescription.properties)
-//
-//            let note = NSManagedObject(entity: entityDescription, insertInto: coreDataManager.managedObjectContext)
-//
-//            note.setValue("My first note", forKey: "title")
-//            note.setValue(Date(), forKey: "createdAt")
-//            note.setValue(Date(), forKey: "updatedAt")
-//
-//            print(note)
-//
-//            do {
-//                try coreDataManager.managedObjectContext.save()
-//            } catch {
-//                print("Unable to save manged object context")
-//                print("\(error), \(error.localizedDescription)")
-//            }
-//        }
+        setupView()
+        fetchNotes()
     }
     
     // MARK: - Navigation
@@ -77,7 +71,74 @@ class NotesViewController: UIViewController {
             break
         }
     }
+    
+    // MARK: - View Methods
+    
+    private func setupView() {
+        setupMessageLabel()
+        setupTableView()
+    }
+    
+    private func updateView() {
+        tableView.isHidden = !hasNotes
+        messageLabel.isHidden = hasNotes
+    }
+    
+    private func setupMessageLabel() {
+        messageLabel.text = "You don't have any notes yet."
+    }
+    
+    private func setupTableView() {
+        tableView.isHidden = true
+        tableView.estimatedRowHeight = estimatedRowHeight
+        tableView.rowHeight = UITableView.automaticDimension
+    }
+    
+    private func fetchNotes() {
+        let fetchRequest: NSFetchRequest<Note> = Note.fetchRequest()
+        
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: #keyPath(Note.updatedAt), ascending: false)]
+        
+            do {
+                let notes = try coreDataManager.managedObjectContext.fetch(fetchRequest)
+                self.notes = notes
+                self.tableView.reloadData()
+            } catch {
+                print("Unable to Execute Fetch Request")
+                print("\(error), \(error.localizedDescription)")
+            }
+        }
+}
 
-
+extension NotesViewController: UITableViewDataSource, UITableViewDelegate {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return hasNotes ? 1 : 0
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        guard let notes = notes else { return 0 }
+        return notes.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        // Fetch Note
+        guard let note = notes?[indexPath.row] else {
+            fatalError("Unexpected Index Path")
+        }
+        
+        // Dequeue Reusable Cell
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: NotesTableViewCell.reuseIdentifier, for: indexPath) as? NotesTableViewCell else {
+            fatalError("Unexpected Index Path")
+        }
+        cell.titleLabel.text = note.title
+        cell.contentsLabel.text = note.contents
+        cell.updatedAtLabel.text = updatedAtDateFormatter.string(from: note.updatedAtAsDate)
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        
+    }
 }
 
