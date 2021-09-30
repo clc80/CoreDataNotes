@@ -32,6 +32,7 @@ class NotesViewController: UIViewController {
     // MARK: - Segues
     private enum Segue {
         static let AddNote = "AddNote"
+        static let Note = "Note"
     }
     
     // MARK: -
@@ -62,11 +63,12 @@ class NotesViewController: UIViewController {
         
         switch identifier {
         case Segue.AddNote:
-            guard let destination = segue.destination as? AddNoteViewController else {
-                return
-            }
+            guard let destination = segue.destination as? AddNoteViewController else { return }
             destination.managedObjectContext = coreDataManager.managedObjectContext
-            
+        case Segue.Note:
+            guard let destination = segue.destination as? NoteViewController else { return }
+            guard let indexPath = tableView.indexPathForSelectedRow, let note = notes?[indexPath.row] else { return }
+            destination.note = note
         default:
             break
         }
