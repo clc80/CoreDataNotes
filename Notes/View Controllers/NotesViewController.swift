@@ -55,6 +55,7 @@ class NotesViewController: UIViewController {
         
         setupView()
         fetchNotes()
+        setupNotificationHandling()
     }
     
     // MARK: - Navigation
@@ -110,6 +111,54 @@ class NotesViewController: UIViewController {
                 print("\(error), \(error.localizedDescription)")
             }
         }
+    
+    private func setupNotificationHandling() {
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.addObserver(self,
+                                       selector: #selector(managedObjectContextObjectsDidChange(_:)),
+                                       name: Notification.Name.NSManagedObjectContextObjectsDidChange,
+                                       object: coreDataManager.managedObjectContext)
+    }
+    
+    @objc private func managedObjectContextObjectsDidChange(_ notification: Notification) {
+        guard let userInfo = notification.userInfo else { return }
+        
+        var notesDidChange = false
+        
+        if let inserted = userInfo[NSInsertedObjectsKey] as? Set<NSManagedObject> {
+            for insert in inserted {
+                if let note = insert as? Note {
+                    notes?.append(note)
+                    notesDidChange = true
+                }
+            }
+        }
+        
+        if let updated = userInfo[NSUpdatedObjectsKey] as? Set<NSManagedObject> {
+            for update in updated {
+                if let _ = update as? Note {
+                    notesDidChange = true
+                }
+            }
+        }
+        
+        if let deleted = userInfo[NSDeletedObjectsKey] as? Set<NSManagedObject> {
+            for delete in deleted {
+                if let note = delete as? Note {
+                    if let index = notes?.firstIndex(of: note) {
+                        notes?.remove(at: index)
+                        notesDidChange = true
+                    }
+                }
+            }
+        }
+        
+        if notesDidChange {
+            notes?.sort(by: { $0.updatedAtAsDate > $1.updatedAtAsDate })
+            tableView.reloadData()
+            updateView()
+        }
+    }
 }
 
 extension NotesViewController: UITableViewDataSource, UITableViewDelegate {
@@ -140,7 +189,15 @@ extension NotesViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        guard editingStyle == .delete else { return }
         
+        guard let note = notes?[indexPath.row] else {
+            fatalError("Unexpected Index Path")
+        }
+        
+        coreDataManager.managedObjectContext.delete(note)
+        // This also works
+        // note.managedObjectContext?.delete(note)
     }
 }
 
