@@ -80,6 +80,7 @@ class NotesViewController: UIViewController {
         case Segue.Note:
             guard let destination = segue.destination as? NoteViewController else { return }
             guard let indexPath = tableView.indexPathForSelectedRow else { return }
+            
             let note = fetchedResultsController.object(at: indexPath)
             destination.note = note
         default:
@@ -148,6 +149,10 @@ extension NotesViewController: UITableViewDataSource, UITableViewDelegate {
         coreDataManager.managedObjectContext.delete(note)
         // This also works
         // note.managedObjectContext?.delete(note)
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true )
     }
     
     private func configure(_ cell: NotesTableViewCell, at indexPath: IndexPath) {
