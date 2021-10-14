@@ -15,10 +15,10 @@ class CategoriesViewController: UIViewController {
     @IBOutlet var messageLabel: UILabel!
     @IBOutlet var tableView: UITableView!
     
-    var managedObjectContext: NSManagedObjectContext?
+    var note: Note?
     
     private lazy var fetchedResultsController: NSFetchedResultsController<Category> = {
-        guard let managedObjectContext = self.managedObjectContext else {
+        guard let managedObjectContext = self.note?.managedObjectContext else {
             fatalError("No Managed Object Context Found")
         }
         // Create Fetch Request
@@ -69,7 +69,7 @@ class CategoriesViewController: UIViewController {
         switch identifier {
         case Segue.AddCategory:
             guard let destination = segue.destination as? AddCategoryViewController else { return }
-            destination.managedObjectContext = managedObjectContext
+            destination.managedObjectContext = note?.managedObjectContext
         case Segue.Category:
             guard let destination = segue.destination as? CategoryViewController else { return }
             guard let cell = sender as? CategoryTableViewCell else { return }
@@ -135,16 +135,25 @@ extension CategoriesViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         guard editingStyle == .delete else { return }
         let category = fetchedResultsController.object(at: indexPath)
-        managedObjectContext?.delete(category)
+        note?.managedObjectContext?.delete(category)
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true )
+        
+        let category = fetchedResultsController.object(at: indexPath)
+        note?.category = category
+        let _ = navigationController?.popViewController(animated: true)
     }
     
     func configure(_ cell: CategoryTableViewCell, at indexPath: IndexPath) {
         let category = fetchedResultsController.object(at: indexPath)
         cell.nameLabel.text = category.name
+        if note?.category == category {
+            cell.nameLabel.textColor = .purple
+        } else {
+            cell.nameLabel.textColor = .black
+        }
     }
     
 }
