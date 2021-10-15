@@ -98,27 +98,110 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VuC-5y-NEW">
-                                <rect key="frame" x="20" y="20" width="374" height="34"/>
+                                <rect key="frame" x="58" y="20" width="336" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LxN-ZR-IKd">
+                                <rect key="frame" x="20" y="20" width="30" height="30"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <gestureRecognizers/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="30" id="53a-Dd-4JN"/>
+                                    <constraint firstAttribute="height" constant="30" id="rXF-WK-TGI"/>
+                                </constraints>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="fji-s0-Of2" appends="YES" id="GzW-D3-eRv"/>
+                                </connections>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Ie0-5L-dc2"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="VuC-5y-NEW" firstAttribute="top" secondItem="Ie0-5L-dc2" secondAttribute="top" constant="20" id="4ej-Pf-Dke"/>
                             <constraint firstItem="Ie0-5L-dc2" firstAttribute="trailing" secondItem="VuC-5y-NEW" secondAttribute="trailing" constant="20" id="afb-In-c7c"/>
-                            <constraint firstItem="VuC-5y-NEW" firstAttribute="leading" secondItem="Ie0-5L-dc2" secondAttribute="leading" constant="20" id="dbu-t5-fg7"/>
+                            <constraint firstItem="LxN-ZR-IKd" firstAttribute="leading" secondItem="Ie0-5L-dc2" secondAttribute="leading" constant="20" id="bZD-2X-30f"/>
+                            <constraint firstItem="VuC-5y-NEW" firstAttribute="leading" secondItem="LxN-ZR-IKd" secondAttribute="trailing" constant="8" id="dbu-t5-fg7"/>
+                            <constraint firstItem="LxN-ZR-IKd" firstAttribute="top" secondItem="Ie0-5L-dc2" secondAttribute="top" constant="20" id="dwF-GY-5v3"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="gDx-57-bDK"/>
                     <connections>
+                        <outlet property="colorView" destination="LxN-ZR-IKd" id="Duj-Fm-xea"/>
                         <outlet property="nameTextField" destination="VuC-5y-NEW" id="kgi-PL-Fb4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jGH-FA-PLl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="fji-s0-Of2">
+                    <connections>
+                        <segue destination="ctm-tD-0QK" kind="show" identifier="Color" id="X06-Au-TOC"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="928" y="406"/>
+        </scene>
+        <!--Color View Controller-->
+        <scene sceneID="0XJ-yM-Vdl">
+            <objects>
+                <viewController id="ctm-tD-0QK" customClass="ColorViewController" customModule="Notes" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="7tB-Uu-bCh">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oLQ-wn-Inq">
+                                <rect key="frame" x="20" y="134" width="374" height="44"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="2nA-34-S1t"/>
+                                </constraints>
+                            </view>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="8zP-jt-GuI" userLabel="Red Slider">
+                                <rect key="frame" x="18" y="8" width="378" height="31"/>
+                                <connections>
+                                    <action selector="colorDidChange:" destination="ctm-tD-0QK" eventType="valueChanged" id="Ot3-Df-wiT"/>
+                                </connections>
+                            </slider>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="cu8-RQ-RBs">
+                                <rect key="frame" x="18" y="46" width="378" height="31"/>
+                                <connections>
+                                    <action selector="colorDidChange:" destination="ctm-tD-0QK" eventType="valueChanged" id="htF-Jx-FvO"/>
+                                </connections>
+                            </slider>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="Aqf-kg-adP">
+                                <rect key="frame" x="18" y="84" width="378" height="31"/>
+                                <connections>
+                                    <action selector="colorDidChange:" destination="ctm-tD-0QK" eventType="valueChanged" id="GRC-P0-eLo"/>
+                                </connections>
+                            </slider>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="NYm-1d-Gmc"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="cu8-RQ-RBs" firstAttribute="leading" secondItem="NYm-1d-Gmc" secondAttribute="leading" constant="20" id="0en-qG-R75"/>
+                            <constraint firstItem="NYm-1d-Gmc" firstAttribute="trailing" secondItem="cu8-RQ-RBs" secondAttribute="trailing" constant="20" id="96G-Yz-hoA"/>
+                            <constraint firstItem="cu8-RQ-RBs" firstAttribute="top" secondItem="8zP-jt-GuI" secondAttribute="bottom" constant="8" id="Aqj-dI-DjP"/>
+                            <constraint firstItem="NYm-1d-Gmc" firstAttribute="trailing" secondItem="oLQ-wn-Inq" secondAttribute="trailing" constant="20" id="IvT-rs-z9j"/>
+                            <constraint firstItem="oLQ-wn-Inq" firstAttribute="top" secondItem="Aqf-kg-adP" secondAttribute="bottom" constant="20" id="Nlm-ug-d91"/>
+                            <constraint firstItem="NYm-1d-Gmc" firstAttribute="trailing" secondItem="8zP-jt-GuI" secondAttribute="trailing" constant="20" id="Wru-lo-Iee"/>
+                            <constraint firstItem="8zP-jt-GuI" firstAttribute="leading" secondItem="NYm-1d-Gmc" secondAttribute="leading" constant="20" id="aJj-D1-gMu"/>
+                            <constraint firstItem="8zP-jt-GuI" firstAttribute="top" secondItem="NYm-1d-Gmc" secondAttribute="top" constant="8" id="bOR-Io-i6e"/>
+                            <constraint firstItem="NYm-1d-Gmc" firstAttribute="trailing" secondItem="Aqf-kg-adP" secondAttribute="trailing" constant="20" id="dWO-jP-baF"/>
+                            <constraint firstItem="Aqf-kg-adP" firstAttribute="leading" secondItem="NYm-1d-Gmc" secondAttribute="leading" constant="20" id="fhP-9I-1vQ"/>
+                            <constraint firstItem="oLQ-wn-Inq" firstAttribute="leading" secondItem="NYm-1d-Gmc" secondAttribute="leading" constant="20" id="u4T-XQ-QjM"/>
+                            <constraint firstItem="Aqf-kg-adP" firstAttribute="top" secondItem="cu8-RQ-RBs" secondAttribute="bottom" constant="8" id="z6X-XP-V7S"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="EhL-h9-Qc7"/>
+                    <connections>
+                        <outlet property="blueSlider" destination="cu8-RQ-RBs" id="ist-se-Dlm"/>
+                        <outlet property="colorView" destination="oLQ-wn-Inq" id="Vkw-Ci-0aK"/>
+                        <outlet property="greenSlider" destination="Aqf-kg-adP" id="qXs-O9-NdH"/>
+                        <outlet property="redSlider" destination="cu8-RQ-RBs" id="MWa-hq-H33"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JdR-FF-ckI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1629" y="406"/>
         </scene>
         <!--Add Category View Controller-->
         <scene sceneID="kC6-G6-dzg">

@@ -9,8 +9,14 @@ import UIKit
 
 class CategoryViewController: UIViewController {
     
+    // MARK: - Segues
+    private enum Segue {
+        static let Color = "Color"
+    }
+    
     // MARK: - Properties
     @IBOutlet var nameTextField: UITextField!
+    @IBOutlet var colorView: UIView!
     
     var category: Category?
     
@@ -40,15 +46,35 @@ class CategoryViewController: UIViewController {
         nameTextField.text = category?.name
     }
     
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    private func setupColorView() {
+        // Configure Layer Color View
+        colorView.layer.cornerRadius = CGFloat(colorView.frame.width / 2.0)
+        updateColorView()
     }
-    */
+    
+    private func updateColorView() {
+        colorView.backgroundColor = category?.color
+    }
+    
+    // MARK: - Navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let identifier = segue.identifier else { return }
+        
+        switch identifier {
+        case Segue.Color:
+            guard let destination = segue.destination as? ColorViewController else { return }
+            // Configure Destination
+            destination.delegate = self
+            destination.color = category?.color ?? .white
+        default:
+            break
+        }
+    }
+}
 
+extension CategoryViewController: ColorViewControllerDelegate {
+    func controller(_ controller: ColorViewController, didPick color: UIColor) {
+        category?.color = color
+        updateColorView()
+    }
 }

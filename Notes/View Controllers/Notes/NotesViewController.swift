@@ -162,6 +162,12 @@ extension NotesViewController: UITableViewDataSource, UITableViewDelegate {
         cell.titleLabel.text = note.title
         cell.contentsLabel.text = note.contents
         cell.updatedAtLabel.text = updatedAtDateFormatter.string(from: note.updatedAtAsDate)
+        
+        if let color = note.category?.color {
+            cell.categoryColorView.backgroundColor = color
+        } else {
+            cell.categoryColorView.backgroundColor = .white
+        }
     }
 }
 

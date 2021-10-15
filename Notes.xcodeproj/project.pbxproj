@@ -12,6 +12,9 @@
 		E75AB48B27062DAE009D9984 /* NotesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E75AB48A27062DAD009D9984 /* NotesTableViewCell.swift */; };
 		E75AB49027063935009D9984 /* Notes.swift in Sources */ = {isa = PBXBuildFile; fileRef = E75AB48F27063935009D9984 /* Notes.swift */; };
 		E75AB4A5270645C4009D9984 /* NoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E75AB4A4270645C4009D9984 /* NoteViewController.swift */; };
+		E79793F92718D88D009CB171 /* ColorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79793F82718D88D009CB171 /* ColorViewController.swift */; };
+		E79793FB2718DDFE009CB171 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79793FA2718DDFE009CB171 /* UIColor.swift */; };
+		E79793FD2718DE28009CB171 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79793FC2718DE28009CB171 /* Category.swift */; };
 		E7DB58B626FAA87C0037EF5C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7DB58B526FAA87C0037EF5C /* AppDelegate.swift */; };
 		E7DB58B826FAA87C0037EF5C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7DB58B726FAA87C0037EF5C /* SceneDelegate.swift */; };
 		E7DB58BA26FAA87C0037EF5C /* NotesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7DB58B926FAA87C0037EF5C /* NotesViewController.swift */; };
@@ -33,6 +36,9 @@
 		E75AB48A27062DAD009D9984 /* NotesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesTableViewCell.swift; sourceTree = "<group>"; };
 		E75AB48F27063935009D9984 /* Notes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notes.swift; sourceTree = "<group>"; };
 		E75AB4A4270645C4009D9984 /* NoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteViewController.swift; sourceTree = "<group>"; };
+		E79793F82718D88D009CB171 /* ColorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorViewController.swift; sourceTree = "<group>"; };
+		E79793FA2718DDFE009CB171 /* UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
+		E79793FC2718DE28009CB171 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		E7DB58B226FAA87C0037EF5C /* Notes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Notes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E7DB58B526FAA87C0037EF5C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E7DB58B726FAA87C0037EF5C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -64,6 +70,7 @@
 		E75AB48427050F4A009D9984 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				E79793FA2718DDFE009CB171 /* UIColor.swift */,
 				E75AB48527050F62009D9984 /* UIViewController.swift */,
 			);
 			path = Extensions;
@@ -81,6 +88,7 @@
 			isa = PBXGroup;
 			children = (
 				E75AB48F27063935009D9984 /* Notes.swift */,
+				E79793FC2718DE28009CB171 /* Category.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -176,6 +184,7 @@
 				E7F67AE7270F5E9C007D6A16 /* CategoriesViewController.swift */,
 				E7F67AEB270F5F0B007D6A16 /* CategoryViewController.swift */,
 				E7F67AED270F5F1F007D6A16 /* AddCategoryViewController.swift */,
+				E79793F82718D88D009CB171 /* ColorViewController.swift */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -275,14 +284,17 @@
 				E7DB58BA26FAA87C0037EF5C /* NotesViewController.swift in Sources */,
 				E7DB595526FBEC1F0037EF5C /* Notes.xcdatamodeld in Sources */,
 				E7F67AEC270F5F0B007D6A16 /* CategoryViewController.swift in Sources */,
+				E79793FB2718DDFE009CB171 /* UIColor.swift in Sources */,
 				E75AB48127050B41009D9984 /* AddNoteViewController.swift in Sources */,
 				E7F67AEE270F5F1F007D6A16 /* AddCategoryViewController.swift in Sources */,
 				E7DB58B626FAA87C0037EF5C /* AppDelegate.swift in Sources */,
 				E75AB49027063935009D9984 /* Notes.swift in Sources */,
 				E7DB595026FBE3480037EF5C /* CoreDataManager.swift in Sources */,
+				E79793FD2718DE28009CB171 /* Category.swift in Sources */,
 				E7DB58B826FAA87C0037EF5C /* SceneDelegate.swift in Sources */,
 				E7F67AF1270F5F48007D6A16 /* CategoryTableViewCell.swift in Sources */,
 				E75AB4A5270645C4009D9984 /* NoteViewController.swift in Sources */,
+				E79793F92718D88D009CB171 /* ColorViewController.swift in Sources */,
 				E75AB48B27062DAE009D9984 /* NotesTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
