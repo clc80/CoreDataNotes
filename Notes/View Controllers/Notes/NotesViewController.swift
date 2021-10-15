@@ -55,7 +55,7 @@ class NotesViewController: UIViewController {
         return dateFormatter
     }()
     
-    // MARK: - LifeCycle
+    // MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -161,6 +161,7 @@ extension NotesViewController: UITableViewDataSource, UITableViewDelegate {
         
         cell.titleLabel.text = note.title
         cell.contentsLabel.text = note.contents
+        cell.tagsLabel.text = note.alphabetizedTagsAsString ?? "No Tags"
         cell.updatedAtLabel.text = updatedAtDateFormatter.string(from: note.updatedAtAsDate)
         
         if let color = note.category?.color {

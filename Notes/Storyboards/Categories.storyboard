@@ -196,7 +196,7 @@
                         <outlet property="blueSlider" destination="cu8-RQ-RBs" id="ist-se-Dlm"/>
                         <outlet property="colorView" destination="oLQ-wn-Inq" id="Vkw-Ci-0aK"/>
                         <outlet property="greenSlider" destination="Aqf-kg-adP" id="qXs-O9-NdH"/>
-                        <outlet property="redSlider" destination="cu8-RQ-RBs" id="MWa-hq-H33"/>
+                        <outlet property="redSlider" destination="8zP-jt-GuI" id="zzb-iM-ucT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JdR-FF-ckI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

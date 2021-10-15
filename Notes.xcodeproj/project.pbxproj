@@ -15,6 +15,11 @@
 		E79793F92718D88D009CB171 /* ColorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79793F82718D88D009CB171 /* ColorViewController.swift */; };
 		E79793FB2718DDFE009CB171 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79793FA2718DDFE009CB171 /* UIColor.swift */; };
 		E79793FD2718DE28009CB171 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79793FC2718DE28009CB171 /* Category.swift */; };
+		E7979400271A0E6B009CB171 /* Tags.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E79793FF271A0E6B009CB171 /* Tags.storyboard */; };
+		E7979404271A2771009CB171 /* TagViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7979403271A2771009CB171 /* TagViewController.swift */; };
+		E7979406271A2781009CB171 /* TagsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7979405271A2781009CB171 /* TagsViewController.swift */; };
+		E7979408271A279D009CB171 /* AddTagViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7979407271A279D009CB171 /* AddTagViewController.swift */; };
+		E797940A271A27BB009CB171 /* TagTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7979409271A27BB009CB171 /* TagTableViewCell.swift */; };
 		E7DB58B626FAA87C0037EF5C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7DB58B526FAA87C0037EF5C /* AppDelegate.swift */; };
 		E7DB58B826FAA87C0037EF5C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7DB58B726FAA87C0037EF5C /* SceneDelegate.swift */; };
 		E7DB58BA26FAA87C0037EF5C /* NotesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7DB58B926FAA87C0037EF5C /* NotesViewController.swift */; };
@@ -40,6 +45,11 @@
 		E79793FA2718DDFE009CB171 /* UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		E79793FC2718DE28009CB171 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		E79793FE271A0C57009CB171 /* Notes 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Notes 2.xcdatamodel"; sourceTree = "<group>"; };
+		E79793FF271A0E6B009CB171 /* Tags.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Tags.storyboard; sourceTree = "<group>"; };
+		E7979403271A2771009CB171 /* TagViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagViewController.swift; sourceTree = "<group>"; };
+		E7979405271A2781009CB171 /* TagsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagsViewController.swift; sourceTree = "<group>"; };
+		E7979407271A279D009CB171 /* AddTagViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTagViewController.swift; sourceTree = "<group>"; };
+		E7979409271A27BB009CB171 /* TagTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagTableViewCell.swift; sourceTree = "<group>"; };
 		E7DB58B226FAA87C0037EF5C /* Notes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Notes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E7DB58B526FAA87C0037EF5C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E7DB58B726FAA87C0037EF5C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -94,6 +104,25 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		E7979401271A26CB009CB171 /* Tags */ = {
+			isa = PBXGroup;
+			children = (
+				E7979402271A26D5009CB171 /* TableViewCells */,
+				E7979403271A2771009CB171 /* TagViewController.swift */,
+				E7979407271A279D009CB171 /* AddTagViewController.swift */,
+				E7979405271A2781009CB171 /* TagsViewController.swift */,
+			);
+			path = Tags;
+			sourceTree = "<group>";
+		};
+		E7979402271A26D5009CB171 /* TableViewCells */ = {
+			isa = PBXGroup;
+			children = (
+				E7979409271A27BB009CB171 /* TagTableViewCell.swift */,
+			);
+			path = TableViewCells;
+			sourceTree = "<group>";
+		};
 		E7DB58A926FAA87C0037EF5C = {
 			isa = PBXGroup;
 			children = (
@@ -137,6 +166,7 @@
 		E7DB58CD26FAA8B90037EF5C /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				E7979401271A26CB009CB171 /* Tags */,
 				E7F67AEA270F5EF0007D6A16 /* Notes */,
 				E7F67AE9270F5EC3007D6A16 /* Categories */,
 			);
@@ -149,6 +179,7 @@
 				E7DB58BB26FAA87C0037EF5C /* Main.storyboard */,
 				E7DB58C026FAA87D0037EF5C /* LaunchScreen.storyboard */,
 				E7F67AE5270F5199007D6A16 /* Categories.storyboard */,
+				E79793FF271A0E6B009CB171 /* Tags.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -267,6 +298,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E7DB58C226FAA87D0037EF5C /* LaunchScreen.storyboard in Resources */,
+				E7979400271A0E6B009CB171 /* Tags.storyboard in Resources */,
 				E7DB58BF26FAA87D0037EF5C /* Assets.xcassets in Resources */,
 				E7F67AE6270F5199007D6A16 /* Categories.storyboard in Resources */,
 				E7DB58BD26FAA87C0037EF5C /* Main.storyboard in Resources */,
@@ -281,6 +313,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E75AB48627050F62009D9984 /* UIViewController.swift in Sources */,
+				E7979408271A279D009CB171 /* AddTagViewController.swift in Sources */,
 				E7F67AE8270F5E9C007D6A16 /* CategoriesViewController.swift in Sources */,
 				E7DB58BA26FAA87C0037EF5C /* NotesViewController.swift in Sources */,
 				E7DB595526FBEC1F0037EF5C /* Notes.xcdatamodeld in Sources */,
@@ -295,6 +328,9 @@
 				E7DB58B826FAA87C0037EF5C /* SceneDelegate.swift in Sources */,
 				E7F67AF1270F5F48007D6A16 /* CategoryTableViewCell.swift in Sources */,
 				E75AB4A5270645C4009D9984 /* NoteViewController.swift in Sources */,
+				E7979404271A2771009CB171 /* TagViewController.swift in Sources */,
+				E797940A271A27BB009CB171 /* TagTableViewCell.swift in Sources */,
+				E7979406271A2781009CB171 /* TagsViewController.swift in Sources */,
 				E79793F92718D88D009CB171 /* ColorViewController.swift in Sources */,
 				E75AB48B27062DAE009D9984 /* NotesTableViewCell.swift in Sources */,
 			);

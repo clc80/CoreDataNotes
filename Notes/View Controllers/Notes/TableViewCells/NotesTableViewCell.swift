@@ -16,6 +16,7 @@ class NotesTableViewCell: UITableViewCell {
     @IBOutlet var contentsLabel: UILabel!
     @IBOutlet var updatedAtLabel: UILabel!
     @IBOutlet var categoryColorView: UIView!
+    @IBOutlet var tagsLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

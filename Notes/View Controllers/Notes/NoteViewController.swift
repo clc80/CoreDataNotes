@@ -14,12 +14,14 @@ class NoteViewController: UIViewController {
     @IBOutlet var titleTextField: UITextField!
     @IBOutlet var contentsTextView: UITextView!
     @IBOutlet var categoryLabel: UILabel!
+    @IBOutlet var tagsLabel: UILabel!
     
     var note: Note? 
     
     // MARK: - Segues
     private enum Segue {
         static let Categories = "Categories"
+        static let Tags = "Tags"
     }
     
     // MARK: - LifeCycle
@@ -58,6 +60,9 @@ class NoteViewController: UIViewController {
         case Segue.Categories:
             guard let destination = segue.destination as? CategoriesViewController else { return }
             destination.note = note
+        case Segue.Tags:
+            guard let destination = segue.destination as? TagsViewController else { return }
+            destination.note = note
         default:
             break
         }
@@ -69,6 +74,7 @@ class NoteViewController: UIViewController {
         setupTitleTextField()
         setupContentsTextView()
         setupCategoryLabel()
+        setupTagsLabel()
     }
     
     private func setupTitleTextField() {
@@ -87,12 +93,21 @@ class NoteViewController: UIViewController {
         categoryLabel.text = note?.category?.name ?? "No Category"
     }
     
+    private func setupTagsLabel() {
+        updateTagsLabel()
+    }
+    
+    private func updateTagsLabel() {
+        tagsLabel.text = note?.alphabetizedTagsAsString ?? "No Tags"
+    }
+    
     @objc private func managedObjectContextObjectsDidChange(_ notification: Notification) {
         guard let userInfo = notification.userInfo else { return }
         guard let updates = userInfo[NSUpdatedObjectsKey] as? Set<NSManagedObject> else { return }
         
         if (updates.filter { return $0 == note}).count > 0 {
             updateCategoryLabel()
+            updateTagsLabel()
         }
     }
     
