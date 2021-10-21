@@ -12,17 +12,18 @@ class NotesViewController: UIViewController {
     
     // MARK: - Properties
     
-    private let coreDataManager = CoreDataManager(modelName: "Notes")
+    private var persistentContainer = NSPersistentContainer(name: "Notes")
 
     @IBOutlet var notesView: UIView!
     @IBOutlet var messageLabel: UILabel!
     @IBOutlet var tableView: UITableView!
+    @IBOutlet var activityIndicatorView: UIActivityIndicatorView!
     
     private lazy var fetchedResultsController: NSFetchedResultsController<Note> = {
         let fetchRequest: NSFetchRequest<Note> = Note.fetchRequest()
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: #keyPath(Note.updatedAt), ascending: false)]
         let fetchResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,
-                                                                managedObjectContext: self.coreDataManager.managedObjectContext,
+                                                                managedObjectContext: self.persistentContainer.viewContext,
                                                                 sectionNameKeyPath: nil,
                                                                 cacheName: nil)
         fetchResultsController.delegate = self
@@ -64,9 +65,16 @@ class NotesViewController: UIViewController {
         
         title =  "Notes"
         
-        setupView()
-        fetchNotes()
-        updateView()
+        persistentContainer.loadPersistentStores { persistentStoreDescription, error in
+            if let error  = error {
+                print("Unable to add Persistent Store")
+                print("\(error), \(error.localizedDescription)")
+            } else {
+                self.setupView()
+                self.fetchNotes()
+                self.updateView()
+            }
+        }
     }
     
     // MARK: - Navigation
@@ -76,7 +84,7 @@ class NotesViewController: UIViewController {
         switch identifier {
         case Segue.AddNote:
             guard let destination = segue.destination as? AddNoteViewController else { return }
-            destination.managedObjectContext = coreDataManager.managedObjectContext
+            destination.managedObjectContext = persistentContainer.viewContext
         case Segue.Note:
             guard let destination = segue.destination as? NoteViewController else { return }
             guard let indexPath = tableView.indexPathForSelectedRow else { return }
@@ -91,6 +99,9 @@ class NotesViewController: UIViewController {
     // MARK: - View Methods
     
     private func setupView() {
+        activityIndicatorView.stopAnimating()
+        notesView.isHidden = false
+        
         setupMessageLabel()
         setupTableView()
     }
@@ -146,7 +157,7 @@ extension NotesViewController: UITableViewDataSource, UITableViewDelegate {
         
         let note = fetchedResultsController.object(at: indexPath)
         
-        coreDataManager.managedObjectContext.delete(note)
+        persistentContainer.viewContext.delete(note)
         // This also works
         // note.managedObjectContext?.delete(note)
     }

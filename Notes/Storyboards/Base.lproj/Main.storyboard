@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="m0N-Iz-SRL">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="m0N-Iz-SRL">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -16,7 +17,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sCq-JU-2YW" userLabel="Notes View">
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="3vx-wt-ZqQ">
+                                <rect key="frame" x="197" y="438" width="20" height="20"/>
+                            </activityIndicatorView>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sCq-JU-2YW" userLabel="Notes View">
                                 <rect key="frame" x="0.0" y="88" width="414" height="774"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="498-2r-SYV">
@@ -30,7 +34,7 @@
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="NoteTableViewCell" id="BL4-YU-trA" customClass="NotesTableViewCell" customModule="Notes" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="24.5" width="414" height="108"/>
+                                                <rect key="frame" x="0.0" y="44.5" width="414" height="108"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="BL4-YU-trA" id="N4g-5B-kja">
                                                     <rect key="frame" x="0.0" y="0.0" width="414" height="108"/>
@@ -117,7 +121,9 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="sCq-JU-2YW" secondAttribute="trailing" id="3qU-Wq-E28"/>
                             <constraint firstItem="sCq-JU-2YW" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="BX0-SG-WWF"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="sCq-JU-2YW" secondAttribute="bottom" id="NR5-pZ-z4V"/>
+                            <constraint firstItem="3vx-wt-ZqQ" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="QiK-kd-0SF"/>
                             <constraint firstItem="sCq-JU-2YW" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="V1d-JU-34L"/>
+                            <constraint firstItem="3vx-wt-ZqQ" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="cia-mz-vfv"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="C34-Br-zjB">
@@ -128,6 +134,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="activityIndicatorView" destination="3vx-wt-ZqQ" id="e6I-SK-AJp"/>
                         <outlet property="messageLabel" destination="498-2r-SYV" id="NcD-y4-QKm"/>
                         <outlet property="notesView" destination="sCq-JU-2YW" id="pWn-Wg-MG9"/>
                         <outlet property="tableView" destination="z6F-ie-pUA" id="0dl-GN-XB3"/>
